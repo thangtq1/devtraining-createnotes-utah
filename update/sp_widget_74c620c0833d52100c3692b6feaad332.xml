@@ -40,33 +40,38 @@
         <public>false</public>
         <roles/>
         <script><![CDATA[(function() {
-    /* populate the 'data' object */
+	/* populate the 'data' object */
 
-    if (input && input.noteID) {
-      var note = new GlideRecord('x_snc_createnotes_note');
-      if (note.get(input.noteID)) {
-        if (input.action == 'getNote') {
-          data.note = {};
-          $sp.getRecordValues(data.note, note, "title, note, sys_id");
-        }
-      }
-    }
-  })();]]></script>
+	if (input && input.noteID) {
+		var note = new GlideRecord('x_snc_createnotes_note');
+		if (note.get(input.noteID)) {
+			if (input.action == 'getNote') {
+				data.note = {};
+				$sp.getRecordValues(data.note, note, "title, note, sys_id");
+			}
+			else if (input.action == 'updateNote') { 
+				note.title = input.noteTitle; 
+				note.note = input.noteBody; 
+				note.update(); 
+			}
+		}
+	}
+})();]]></script>
         <servicenow>false</servicenow>
         <sys_class_name>sp_widget</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2024-11-06 03:18:03</sys_created_on>
         <sys_id>74c620c0833d52100c3692b6feaad332</sys_id>
-        <sys_mod_count>7</sys_mod_count>
+        <sys_mod_count>9</sys_mod_count>
         <sys_name>Notes Body</sys_name>
         <sys_package display_value="CreateNotes" source="x_snc_createnotes">df5fd9a5090232007f44e1046c8ff69f</sys_package>
         <sys_policy/>
         <sys_scope display_value="CreateNotes">df5fd9a5090232007f44e1046c8ff69f</sys_scope>
         <sys_update_name>sp_widget_74c620c0833d52100c3692b6feaad332</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2024-11-06 11:44:09</sys_updated_on>
+        <sys_updated_on>2024-11-07 02:52:05</sys_updated_on>
         <template><![CDATA[<div>
-<!-- your widget template -->
+  <!-- your widget template -->
   <div class="panel panel-default" ng-show="c.data.noteID">
     <div class="panel-heading clearfix">
       <div class="row">
